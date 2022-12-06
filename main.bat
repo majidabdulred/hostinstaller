@@ -60,7 +60,7 @@ set MODEL_INSTALLED=F
 set PATH=%VENV%\Scripts;%PATH%
 
 @cd %WEBUI%
-@rem @call webui-user.bat
-@echo Calling webui-user.bat
-@echo Finished.
+@call webui-user.bat
+@rem echo Calling webui-user.bat
+@rem echo Finished.
 @pause
