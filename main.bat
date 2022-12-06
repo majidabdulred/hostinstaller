@@ -50,6 +50,8 @@ set MODEL_INSTALLED=F
 
 @if not exist "%VENV%" (
     @echo Installing Python 3.10.6
+    @call where micromamba
+    @echo %cd%
     @call micromamba create --prefix ./python310  -y -f micro.yaml
     @echo Creating virtual environment...
     @call %ROOT_DIR%\python310\python -m venv %VENV%
