@@ -2,7 +2,7 @@
 
 set WEBUI=%ROOT_DIR%\stable_diffusion_webui
 set MODEL=%WEBUI%\models\model.ckpt
-set SD1v4MODEL=C:\diffusion\stable-diffusion-webui\models\Stable-diffusion\sd-v1-4.ckpt
+set SD1v4MODEL=%WEBUI%\models\Stable-diffusion\sd-v1-4.ckpt
 
 set VENV=%WEBUI%\venv
 set MODEL_INSTALLED=F
