@@ -33,6 +33,13 @@ set MODEL_INSTALLED=F
     )
 )
 
+@if exist "%WEBUI%\models\Stable-diffusion\model.ckpt" (
+    for %%I in ("%WEBUI%\models\Stable-diffusion\model.ckpt") do if "%%~zI" EQU "4265380512" (
+        echo "Data files (weights) necessary for Stable Diffusion were already downloaded. Using the 4 GB Model."
+        set MODEL_INSTALLED=T
+    )
+)
+
 @if "%MODEL_INSTALLED%" == "F" (
     @echo "Downloading the model"
     @call curl -L -k https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt > %MODEL%
