@@ -73,7 +73,17 @@ set PATH=%VENV%\Scripts;%PATH%
     @echo Downloading ClientRunner.exe
     @call curl -Lk %CLIENT_RUNNER% > %CLIENT_RUNNER_PATH%
 )
+
 start %EASYINSTALLER_DIR%\ClientRunner.exe
-@call webui-user.bat
+
+
+set PYTHON=
+set GIT=
+set VENV_DIR=
+set COMMANDLINE_ARGS= --api --xformers
+
+@cd %WEBUI%
+@call webui.bat
+
 @rem echo Calling webui-user.bat
 @rem echo Finished.
