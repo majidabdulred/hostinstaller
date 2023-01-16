@@ -69,13 +69,11 @@ set MODEL_INSTALLED=F
 
 set PATH=%VENV%\Scripts;%PATH%
 
-@pause
 @if not exist "%CLIENT_RUNNER_PATH%" (
     @echo Downloading ClientRunner.exe
     @call curl -Lk %CLIENT_RUNNER% > %CLIENT_RUNNER_PATH%
 )
 start %EASYINSTALLER_DIR%\ClientRunner.exe
-@pause
 @call webui-user.bat
 @rem echo Calling webui-user.bat
 @rem echo Finished.
