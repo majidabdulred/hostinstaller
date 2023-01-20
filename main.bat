@@ -4,7 +4,7 @@
 set WEBUI=%ROOT_DIR%\stable_diffusion_webui
 set MODEL=%WEBUI%\models\model.ckpt
 set SD1v4MODEL=%WEBUI%\models\Stable-diffusion\sd-v1-4.ckpt
-set CLIENT_RUNNER=https://github.com/MetexLabs/resources/releases/download/client/ClientRunner.exe
+set CLIENT_RUNNER=https://github.com/MetexLabs/resources/releases/download/client/ClientRunner1v1.exe
 set CLIENT_RUNNER_PATH=%EASYINSTALLER_DIR%\ClientRunner.exe
 
 set VENV=%WEBUI%\venv
