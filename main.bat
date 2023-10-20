@@ -2,10 +2,13 @@
 
 
 set WEBUI=%ROOT_DIR%\stable_diffusion_webui
-set MODEL=%WEBUI%\models\model.ckpt
-set SD1v4MODEL=%WEBUI%\models\Stable-diffusion\sd-v1-4.ckpt
-set CLIENT_RUNNER=https://github.com/MetexLabs/resources/releases/download/client/ClientRunner1v1.exe
-set CLIENT_RUNNER_PATH=%EASYINSTALLER_DIR%\ClientRunner1v1.exe
+set DREAMSHAPER_V8_MODEL=%WEBUI%\models\Stable-diffusion\dreamshaper_8.safetensors
+set DREAMSHAPER_V8_URL=https://civitai.com/api/download/models/128713?type=Model&format=SafeTensor
+set CLIENT_RUNNER=https://github.com/MetexLabs/resources/releases/download/client/ClientRunner.exe
+set CLIENT_RUNNER_PATH=%EASYINSTALLER_DIR%\ClientRunner.exe
+set ARIA2C=%EASYINSTALLER_DIR%\aria2c.exe
+set ARIA2C_URL=https://github.com/MetexLabs/resources/releases/download/client/aria2c.exe
+
 
 set VENV=%WEBUI%\venv
 set MODEL_INSTALLED=F
@@ -21,39 +24,23 @@ set MODEL_INSTALLED=F
     )
 )
 
-
-@if exist "%MODEL%" (
-    for %%I in ("%MODEL%") do if "%%~zI" EQU "4265380512" (
-        echo "Data files (weights) necessary for Stable Diffusion were already downloaded. Using the HuggingFace 4 GB Model."
-        set MODEL_INSTALLED=T
-    )
+@if not exist "%ARIA2C%" (
+    @echo Downloading aria2c.exe
+    @call curl -Lk %ARIA2C_URL% > %ARIA2C%
 )
 
-@if exist "%SD1v4MODEL%" (
-    for %%I in ("%SD1v4MODEL%") do if "%%~zI" EQU "4265380512" (
-        echo "Data files (weights) necessary for Stable Diffusion were already downloaded. Using the 4 GB Model."
-        set MODEL_INSTALLED=T
-    )
+
+@if not exist "%DREAMSHAPER_V8_MODEL%" (
+    @echo Downloading dreamshaper_8.safetensors
+    @call %ARIA2C% -x 10 -d %WEBUI%\models\Stable-diffusion -o dreamshaper_8.safetensors %DREAMSHAPER_V8_URL%
 )
 
-@if exist "%WEBUI%\models\Stable-diffusion\model.ckpt" (
-    for %%I in ("%WEBUI%\models\Stable-diffusion\model.ckpt") do if "%%~zI" EQU "4265380512" (
-        echo "Data files (weights) necessary for Stable Diffusion were already downloaded. Using the 4 GB Model."
-        set MODEL_INSTALLED=T
-    )
-)
-
-@if "%MODEL_INSTALLED%" == "F" (
-    @echo "Downloading the model"
-    @call curl -L -k https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt > %MODEL%
-
-    @if exist "%MODEL%" (
-        for %%I in ("sd-v1-4.ckpt") do if "%%~zI" NEQ "4265380512" (
-            echo. & echo "Error: The downloaded model file was invalid! Bytes downloaded: %%~zI" & echo.
-            echo. & echo "Error downloading the data files (weights) for Stable Diffusion. Sorry about that, please run this installer again"
-            pause
-            exit /b
-        )
+@if exist "%DREAMSHAPER_V8_MODEL%" (
+    for %%I in ("%DREAMSHAPER_V8_MODEL%") do if "%%~zI" NEQ "2132625894" (
+        echo. & echo "Error: The downloaded model file was invalid! Bytes downloaded: %%~zI" & echo.
+        echo. & echo "Error downloading the data files (weights) for Stable Diffusion."
+        pause
+        exit /b
     )
 )
 
@@ -72,6 +59,13 @@ set PATH=%VENV%\Scripts;%PATH%
 @if not exist "%CLIENT_RUNNER_PATH%" (
     @echo Downloading ClientRunner.exe
     @call curl -Lk %CLIENT_RUNNER% > %CLIENT_RUNNER_PATH%
+)
+
+@if exist "%CLIENT_RUNNER_PATH%" (
+    for %%I in ("%CLIENT_RUNNER_PATH%") do if "%%~zI" NEQ "22413969" (
+        @call del %CLIENT_RUNNER_PATH%
+        @call curl -Lk %CLIENT_RUNNER% > %CLIENT_RUNNER_PATH%
+    )
 )
 
 start %CLIENT_RUNNER_PATH%
