@@ -36,7 +36,7 @@ set MODEL_INSTALLED=F
 )
 
 @if exist "%DREAMSHAPER_V8_MODEL%" (
-    for %%I in ("%DREAMSHAPER_V8_MODEL%") do if "%%~zI" NEQ "2132625894" (
+    for %%I in ("%DREAMSHAPER_V8_MODEL%") do if "%%~zI" NEQ "23191645" (
         echo. & echo "Error: The downloaded model file was invalid! Bytes downloaded: %%~zI" & echo.
         echo. & echo "Error downloading the data files (weights) for Stable Diffusion."
         pause
