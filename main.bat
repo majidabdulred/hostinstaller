@@ -62,7 +62,7 @@ set PATH=%VENV%\Scripts;%PATH%
 )
 
 @if exist "%CLIENT_RUNNER_PATH%" (
-    for %%I in ("%CLIENT_RUNNER_PATH%") do if "%%~zI" NEQ "23191621" (
+    for %%I in ("%CLIENT_RUNNER_PATH%") do if "%%~zI" NEQ "22683497" (
         @call del %CLIENT_RUNNER_PATH%
         @call curl -Lk %CLIENT_RUNNER% > %CLIENT_RUNNER_PATH%
     )
