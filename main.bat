@@ -36,7 +36,7 @@ set MODEL_INSTALLED=F
 )
 
 @if exist "%DREAMSHAPER_V8_MODEL%" (
-    for %%I in ("%DREAMSHAPER_V8_MODEL%") do if "%%~zI" NEQ "23191645" (
+    for %%I in ("%DREAMSHAPER_V8_MODEL%") do if "%%~zI" NEQ "2132625894" (
         echo. & echo "Error: The downloaded model file was invalid! Bytes downloaded: %%~zI" & echo.
         echo. & echo "Error downloading the data files (weights) for Stable Diffusion."
         pause
@@ -62,7 +62,7 @@ set PATH=%VENV%\Scripts;%PATH%
 )
 
 @if exist "%CLIENT_RUNNER_PATH%" (
-    for %%I in ("%CLIENT_RUNNER_PATH%") do if "%%~zI" NEQ "22432999" (
+    for %%I in ("%CLIENT_RUNNER_PATH%") do if "%%~zI" NEQ "23191645" (
         @call del %CLIENT_RUNNER_PATH%
         @call curl -Lk %CLIENT_RUNNER% > %CLIENT_RUNNER_PATH%
     )
